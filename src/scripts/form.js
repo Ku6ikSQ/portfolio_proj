@@ -16,7 +16,7 @@ const getMessage = (admId, usrId, edit) => {
     if(edit) {
         return `
             <div class="info">
-                <h3 class="tac typography" style="margin-bottom: 5px;">Изменения внесены</р>
+                <h3 class="tac typography" style="margin-bottom: 5px;">Изменения внесены</h3>
                 <button class="btn" id="btn-back">Вернуться к просмотру</button>
             </div>
         `;
@@ -93,18 +93,24 @@ document.addEventListener("DOMContentLoaded", () => {
  
             const data = { title, text, work, img, admId, usrId, };
             new Promise(res => {
-                if(edit) {
-                    fetch(`${databaseId}/portfolios/${portfolioIdx}.json`, {method: "DELETE"});
-                }
+                const response = grecaptcha.getResponse();
+                if(response.length === 0)
+                    return;
                 res();
             })
+                .then(() => {
+                    if(edit) {
+                        fetch(`${databaseId}/portfolios/${portfolioIdx}.json`, {method: "DELETE"});
+                    }
+                })
                 .then(() => {
                     fetch(`${databaseId}/portfolios.json`, {method: "POST", body: JSON.stringify(data)});
                 })
                 .then(() => {
                     form.reset();
                     document.getElementById("signup").innerHTML = getMessage(admId, usrId, edit);
-                    document.getElementById("btn-back").addEventListener("click", () => window.location.replace(`./portfolio.html?id=${id}`))
+                    if(edit)
+                        document.getElementById("btn-back").addEventListener("click", () => window.location.replace(`./portfolio.html?id=${id}`))
                 })
         });
     })
