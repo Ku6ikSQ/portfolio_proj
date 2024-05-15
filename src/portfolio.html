@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проект</title>
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+    <header class="header">
+        <a href="./index.html" class="logo">ЛОГОТИП</a>
+        <button id="theme-switcher" type="button" class="btn theme">ТЕМА</button>
+    </header>
+
+    <main class="box main">
+       <div class="container container__slim">
+           <div class="main__wrapper" id="main-wrapper">
+           </div>
+       </div>       
+    </main>
+    
+    <script type="module">
+        import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        const firebaseConfig = {
+          apiKey: "AIzaSyD4SJVefOxbRs5cHnAAazw30b6Y_qMdPGw",
+          authDomain: "portfolio-app-536d7.firebaseapp.com",
+          projectId: "portfolio-app-536d7",
+          storageBucket: "portfolio-app-536d7.appspot.com",
+          messagingSenderId: "277615129475",
+          appId: "1:277615129475:web:ed965cc06fad4b36e6bcb6"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+    </script>
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/portfolio.js"></script>
+</body>
+</html>

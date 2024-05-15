@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <title>Sing up</title>
+</head>
+<body>
+    <header class="header">
+        <a href="./index.html" class="logo">ЛОГОТИП</a>
+        <button id="theme-switcher" type="button" class="btn theme">ТЕМА</button>
+    </header>
+
+    <main class="box main">
+       <div class="container">
+           <div class="main__wrapper" id="signup">
+                <div class="info">
+                    <h2 id="form-title" class="typography main__title">
+                        Создание карточки
+                    </h2>
+                </div>
+
+                <form id="form-create" class="form">
+                    <span class="error__info">Проверьте корректность данных</span>
+                    <input id="title_input" type="text" class="input" placeholder="Введите название" />
+                    <textarea id="text_input" type="text" class="input" placeholder="Введите описание"></textarea> 
+                    <input id="work_input" type="text" class="input" placeholder="Ссылка на работу" />
+                    <input id="img_input" type="text" class="input" placeholder="Ссылка на изображение" />
+                    <!--<input id="img_input" type="file" placeholder="Ссылка на изображение" />-->
+                                        
+                    <div class="actions">
+                        <button id="create-form" type="submit" class="btn">Создать</button>
+                    </div>  
+                </form>
+           </div>
+       </div>       
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        const firebaseConfig = {
+          apiKey: "AIzaSyD4SJVefOxbRs5cHnAAazw30b6Y_qMdPGw",
+          authDomain: "portfolio-app-536d7.firebaseapp.com",
+          projectId: "portfolio-app-536d7",
+          storageBucket: "portfolio-app-536d7.appspot.com",
+          messagingSenderId: "277615129475",
+          appId: "1:277615129475:web:ed965cc06fad4b36e6bcb6"
+        };
+      
+        // Initialize Firebase
+        initializeApp(firebaseConfig);
+    </script>
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/form.js"></script>
+</body>
+</html>
