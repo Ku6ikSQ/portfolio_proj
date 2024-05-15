@@ -117,6 +117,12 @@ button {
     background-color: #0940a8;
 }
 
+.header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .logo {
     color: #ffffff;
     font-weight: 700;
