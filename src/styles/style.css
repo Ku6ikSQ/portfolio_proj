@@ -98,6 +98,7 @@ button {
 
 /* HEADER */
 .header {
+    position: fixed;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -120,7 +121,24 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 90px);
+    min-height: calc(100vh - 80px);
+}
+
+/* FOOTER */
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    background-color: #0940a8;
+    height: 80px;
+}
+
+.footer__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* MAIN */
@@ -200,4 +218,9 @@ button {
 .portfolio__title {
     font-size: 36px;
     margin-bottom: 20px;
+}
+
+/* OTHER */
+.mb0 {
+    margin-bottom: 0;
 }
