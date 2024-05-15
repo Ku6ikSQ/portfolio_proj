@@ -16,7 +16,7 @@ const getMessage = (admId, usrId, edit) => {
     if(edit) {
         return `
             <div class="info">
-                <h3 class="tac typography" style="margin-bottom: 5px;">Изменения внесены</h3>
+                <h3 class="tac typography" style="margin-bottom: 20px;">Изменения внесены</h3>
                 <button class="btn" id="btn-back">Вернуться к просмотру</button>
             </div>
         `;
