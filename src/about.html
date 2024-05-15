@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас</title>
     <link rel="stylesheet" href="./styles/normalize.css">
     <link rel="stylesheet" href="./styles/style.css">
-    <title>Войти</title>
 </head>
 <body>
     <header class="header">
@@ -13,38 +13,34 @@
         <button id="theme-switcher" type="button" class="btn theme">ТЕМА</button>
     </header>
 
-    <main class="box main">
+    <main class="box main about">
        <div class="container">
            <div class="main__wrapper">
                 <div class="info">
-                    <h2 class="typography main__title">
-                        Просмотреть работу
+                    <h2 class="typography main__title about__title">
+                        Информация о проекте
                     </h2>
+                   <div class="about__text">
+                        <p class="text mb0 info__text">Мы - студенты ИРИТ-РТФ, обущающиеся на 09-х направлениях.</p>
+                        <p class="text info__text">Это наш проект, созданный в рамках образовательного предмета "Проектная деятельность".</p>
+                        <p class="text info__text">Мы очень старались, так что надеемся, что сайт вам понравился =)</p>
+                   </div>
                 </div>
-
-                <form id="form-create" class="form">
-                    <span class="error__info">Проверьте корректность данных</span>
-                    <input id="id-input" type="text" class="input" placeholder="Введите идентификатор" />
-                                        
-                    <div class="actions">
-                        <button id="create-form" type="submit" class="btn">Войти</button>
-                    </div>  
-                </form>
            </div>
        </div>       
     </main>
 
     <footer class="footer">
-        <div class="container">
-         <div class="footer__inner">
-             <p class="text mb0">© 2024 Proj-team</p>
-             <nav class="nav">
+       <div class="container">
+        <div class="footer__inner">
+            <p class="text mb0">© 2024 Proj-team</p>
+            <nav class="nav">
                 <a href="./index.html" class="btn">Главная</a>
                 <a href="./about.html" class="btn">О нас</a>
              </nav>
-         </div>
         </div>
-     </footer>
+       </div>
+    </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
@@ -61,6 +57,5 @@
         const app = initializeApp(firebaseConfig);
     </script>
     <script src="./scripts/index.js"></script>
-    <script src="./scripts/auth.js"></script>
 </body>
 </html>

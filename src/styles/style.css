@@ -85,6 +85,10 @@ button {
     color: #fff;
 }
 
+.footer .text {
+    color: #fff;
+}
+
 .container {
     max-width: 1170px;
     width: 100%;
@@ -224,6 +228,19 @@ button {
 .portfolio__title {
     font-size: 36px;
     margin-bottom: 20px;
+}
+
+/* ABOUT */
+.about__title {
+    margin-bottom: 30px;
+}
+
+/* .about__text {
+} */
+
+.about__text p {
+    font-size: 19px;
+    margin-bottom: 5px;
 }
 
 /* OTHER */
