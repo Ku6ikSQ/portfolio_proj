@@ -53,6 +53,7 @@ button {
 }
 
 .btn {
+    text-align: center;
     color: #fff;
     background-color:  #0940a8;
     display: inline-block;
