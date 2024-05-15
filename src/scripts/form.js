@@ -17,6 +17,7 @@ const getMessage = (admId, usrId, edit) => {
         return `
             <div class="info">
                 <h3 class="tac typography" style="margin-bottom: 5px;">Изменения внесены</р>
+                <button class="btn" id="btn-back">Вернуться к просмотру</button>
             </div>
         `;
     } else {
@@ -103,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(() => {
                     form.reset();
                     document.getElementById("signup").innerHTML = getMessage(admId, usrId, edit);
+                    document.getElementById("btn-back").addEventListener("click", () => window.location.replace(`./portfolio.html?id=${id}`))
                 })
         });
     })
