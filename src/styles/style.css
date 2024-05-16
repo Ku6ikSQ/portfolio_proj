@@ -59,16 +59,16 @@ button {
 .btn {
     text-align: center;
     color: #fff;
-    background-color:  #0940a8;
+    background-color:  #151515;
     display: inline-block;
     padding: 12px 20px; 
     border-radius: 5px;
-    border: 1px solid  #0940a8;
+    /*border: 1px solid  #ffffff;*/
     transition: background .2s linear;
 }
 
 .btn:hover {
-    background-color:  #08368c;
+    background-color:  #292929;
 }
 
 .typography {
@@ -91,7 +91,7 @@ button {
 }
 
 .footer .text {
-    color: #fff;
+    color: #151515;
 }
 
 .container {
@@ -114,7 +114,7 @@ button {
     align-items: center;
     padding: 25px 15px;
     height: 90px;
-    background-color: #0940a8;
+    background-color: #ffffff;
 }
 
 .header__inner {
@@ -124,12 +124,12 @@ button {
 }
 
 .logo {
-    color: #ffffff;
+    color: #151515;
     font-weight: 700;
 } 
 
 .theme {
-    color: #ffffff;
+    color: #fff;
 }
 
 .main {
@@ -147,7 +147,7 @@ button {
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
-    background-color: #0940a8;
+    background-color: #ffffff;
     height: 80px;
 }
 
