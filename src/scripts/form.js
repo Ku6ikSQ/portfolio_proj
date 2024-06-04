@@ -92,9 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = { title, text, work, img: imgName, admId, usrId, };
             new Promise(res => {
                 // NOTE: comment it (3 rows below) for dev mode
-                // const response = grecaptcha.getResponse();
-                // if(response.length === 0)
-                //     return;
+                const response = grecaptcha.getResponse();
+                if(response.length === 0)
+                    return;
                 if(img) {
                     const storageRef = firebase.storage().ref(imgName);
                     const task = storageRef.put(img);

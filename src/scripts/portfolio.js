@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let imgURL;
     // get portfolio from database
     fetch(`${databaseId}/portfolios.json`)
-        // .then(res => res.json()).then(port => console.log(port));
         .then(res => {
             if(!res)
                 return null;
