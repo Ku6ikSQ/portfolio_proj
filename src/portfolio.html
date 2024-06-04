@@ -35,8 +35,9 @@
          </div>
         </div>
      </footer>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
     <script type="module">
-        import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        // import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
         const firebaseConfig = {
           apiKey: "AIzaSyD4SJVefOxbRs5cHnAAazw30b6Y_qMdPGw",
           authDomain: "portfolio-app-536d7.firebaseapp.com",
@@ -47,7 +48,7 @@
         };
       
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
     </script>
     <script src="./scripts/index.js"></script>
     <script src="./scripts/portfolio.js"></script>

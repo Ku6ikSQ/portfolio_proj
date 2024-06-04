@@ -54,13 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const imgInput = document.getElementById("img_input");
     const createBtn = document.getElementById("create-form");
     const formTitle = document.getElementById("form-title");
-
     let edit = id && id.length > 0;
     if(edit) {
         formTitle.textContent = "Изменение работы"
         createBtn.textContent = "Сохранить изменения";
     }
-
     fetch(`${databaseId}/portfolios.json`)
         .then(res => res.json())
         .then(objects => {
@@ -70,15 +68,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 titleInput.value = portfolio.title;
                 textInput.value = portfolio.text;
                 workInput.value = portfolio.work;
-                imgInput.value = portfolio.img;
             }
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
                 const title = titleInput.value;
                 const text = textInput.value;
                 const work = workInput.value;
-                const img = imgInput.value;
-                if(!isValidURL(work) || !isValidURL(img)) {
+                const img = imgInput.files[0];
+                const imgName = img ? getRandom(5) + "_" + img.name : portfolio.img;
+                if(!isValidURL(work)) {
                     form.classList.add("error");
                     return;
                 }
@@ -91,12 +89,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     usrId = portfolio.usrId;
                 }
  
-            const data = { title, text, work, img, admId, usrId, };
+            const data = { title, text, work, img: imgName, admId, usrId, };
             new Promise(res => {
-                const response = grecaptcha.getResponse();
-                if(response.length === 0)
-                    return;
-                res();
+                // NOTE: comment it (3 rows below) for dev mode
+                // const response = grecaptcha.getResponse();
+                // if(response.length === 0)
+                //     return;
+                if(img) {
+                    const storageRef = firebase.storage().ref(imgName);
+                    const task = storageRef.put(img);
+                    task.on('state_changed', function progress() {}, function error(err) {}, function complete() {
+                        res();
+                    })
+                }
             })
                 .then(() => {
                     if(edit) {

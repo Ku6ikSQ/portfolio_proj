@@ -32,8 +32,8 @@
                     <input id="title_input" type="text" class="input" placeholder="Введите название" />
                     <textarea id="text_input" type="text" class="input" placeholder="Введите описание"></textarea> 
                     <input id="work_input" type="text" class="input" placeholder="Ссылка на работу" />
-                    <input id="img_input" type="text" class="input" placeholder="Ссылка на изображение" />
-                    <!--<input id="img_input" type="file" placeholder="Ссылка на изображение" />-->
+                    <!-- <input id="img_input" type="text" class="input" placeholder="Ссылка на изображение" /> -->
+                    <input id="img_input" type="file" />
                                         
                     <div class="actions">
                         <button id="create-form" type="submit" class="btn btn-mr">Создать</button>
@@ -55,8 +55,9 @@
          </div>
         </div>
      </footer>
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
         const firebaseConfig = {
           apiKey: "AIzaSyD4SJVefOxbRs5cHnAAazw30b6Y_qMdPGw",
           authDomain: "portfolio-app-536d7.firebaseapp.com",
@@ -67,7 +68,7 @@
         };
       
         // Initialize Firebase
-        initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
     </script>
     <script src="./scripts/index.js"></script>
     <script src="./scripts/form.js"></script>
