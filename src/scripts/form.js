@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const textInput = document.getElementById("text_input");
     const workInput = document.getElementById("work_input");
     const imgInput = document.getElementById("img_input");
+    const sourceInput = document.getElementById("source_input");
     const createBtn = document.getElementById("create-form");
     const formTitle = document.getElementById("form-title");
     let edit = id && id.length > 0;
@@ -75,7 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const text = textInput.value;
                 const work = workInput.value;
                 const img = imgInput.files[0];
+                const source = sourceInput.files[0];
                 const imgName = img ? getRandom(5) + "_" + img.name : portfolio.img;
+                const sourceName = img ? getRandom(5) + "_" + source.name : portfolio.source;
                 if(!isValidURL(work)) {
                     form.classList.add("error");
                     return;
@@ -89,18 +92,22 @@ document.addEventListener("DOMContentLoaded", () => {
                     usrId = portfolio.usrId;
                 }
  
-            const data = { title, text, work, img: imgName, admId, usrId, };
+            const data = { title, text, work, img: imgName, source: sourceName, admId, usrId, };
             new Promise(res => {
                 // NOTE: comment it (3 rows below) for dev mode
-                const response = grecaptcha.getResponse();
-                if(response.length === 0)
-                    return;
-                if(img) {
-                    const storageRef = firebase.storage().ref(imgName);
-                    const task = storageRef.put(img);
-                    task.on('state_changed', function progress() {}, function error(err) {}, function complete() {
+                // const response = grecaptcha.getResponse();
+                // if(response.length === 0)
+                //     return;
+                if(img || source) {
+                    const storageRefImg = firebase.storage().ref(imgName);
+                    const storageRefSrc = firebase.storage().ref(sourceName);
+                    const tasks = [img ? storageRefImg.put(img) : new Promise(), source ? storageRefSrc.put(source) : new Promise()];
+                    Promise.all(tasks).then((_) => {
                         res();
                     })
+                    // task1.on('state_changed', function progress() {}, function error(err) {}, function complete() {
+                    //     res();
+                    // })
                 }
             })
                 .then(() => {
