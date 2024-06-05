@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(objects => {
             const [portfolio, portfolioIdx] = findRecord(objects, id);
-
             if(portfolio) {
                 titleInput.value = portfolio.title;
                 textInput.value = portfolio.text;

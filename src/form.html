@@ -31,8 +31,16 @@
                     <span class="error__info">Проверьте корректность данных</span>
                     <input id="title_input" type="text" class="input" placeholder="Введите название" />
                     <textarea id="text_input" type="text" class="input" placeholder="Введите описание"></textarea> 
-                    <input id="img_input" accept="image/*" type="file" />
-                    <input id="source_input" accept=".zip,.rar,.7z,.tar,.gz" type="file" />
+                    <div class="file-input-container">
+                        <input class="file-input" id="img_input" accept="image/*" type="file" />
+                        <span class="custom-file-label">Выберите файл</span>
+                    </div>
+                    <div class="file-input-container">
+                        <input class="file-input" id="source_input" accept=".zip,.rar,.7z,.tar,.gz" type="file" />
+                        <span class="custom-file-label">Выберите файл</span>
+                    </div>
+                    <!-- <input id="img_input" accept="image/*" type="file" />
+                    <input id="source_input" accept=".zip,.rar,.7z,.tar,.gz" type="file" /> -->
                                         
                     <div class="actions">
                         <button id="create-form" type="submit" class="btn btn-mr">Создать</button>
@@ -68,6 +76,20 @@
       
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
+    </script>
+     <script>
+        const fileInputs = document.querySelectorAll('.file-input');
+        const fileLabels = document.querySelectorAll('.custom-file-label');
+        
+        fileInputs.forEach((fileInput, i) => {
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files.length > 0) {
+                    fileLabels[i].textContent = fileInput.files[0].name;
+                } else {
+                    fileLabels[i].textContent = 'Выберите файл';
+                }
+            });
+        })
     </script>
     <script src="./scripts/index.js"></script>
     <script src="./scripts/form.js"></script>

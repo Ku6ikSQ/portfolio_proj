@@ -259,3 +259,28 @@ button {
 .mb0 {
     margin-bottom: 0;
 }
+
+.file-input-container {
+    display: inline-block;
+    position: relative;
+}
+
+.file-input-container input[type="file"] {
+    display: inline-block;
+    position: relative;
+    opacity: 0;
+    z-index: 2;
+}
+
+.file-input-container .custom-file-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 15px 30px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    z-index: 1;
+    width: 100%;
+}
