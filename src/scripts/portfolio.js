@@ -25,12 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(objects => {
             const [portfolio, portfolioId] = findRecord(objects, id);
             const isAdmin = () => portfolio && portfolio.admId === JSON.parse(id);
-            console.log(portfolio);
+            let imgURL, sourceURL;
             firebase.storage().ref(portfolio.img).getDownloadURL()
-            .then((imgURL) => {
-                return imgURL;
+            .then((data) => {
+                imgURL = data;
+                return firebase.storage().ref(portfolio.source).getDownloadURL();
             })
-            .then(imgURL => {
+            .then((data) => {
+                sourceURL = data;
                 if(portfolio) {
                     const editBtnTemplate = isAdmin() ? `<button class="btn btn-mr" type="button" id="edit-btn">Редактировать</button>` : "";
                     const removeBtnTemplate = isAdmin() ? `<button class="btn" type="button" id="remove-btn">Удалить</button>` : "";
@@ -48,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
                         </div>
                         <div class="actions">
-                            <a target="_blank" class="btn btn-mr" href="${portfolio.work}">Посмотреть работу</a>
+                            <a target="_blank" class="btn btn-mr" href="${sourceURL}" download="${sourceURL}">Скачать работу</a>
                             ${editBtnTemplate}
                             ${removeBtnTemplate}
                         </div>

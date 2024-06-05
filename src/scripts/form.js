@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("form-create");
     const titleInput = document.getElementById("title_input");
     const textInput = document.getElementById("text_input");
-    const workInput = document.getElementById("work_input");
     const imgInput = document.getElementById("img_input");
     const sourceInput = document.getElementById("source_input");
     const createBtn = document.getElementById("create-form");
@@ -68,22 +67,20 @@ document.addEventListener("DOMContentLoaded", () => {
             if(portfolio) {
                 titleInput.value = portfolio.title;
                 textInput.value = portfolio.text;
-                workInput.value = portfolio.work;
             }
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
                 const title = titleInput.value;
                 const text = textInput.value;
-                const work = workInput.value;
                 const img = imgInput.files[0];
                 const source = sourceInput.files[0];
                 const imgName = img ? getRandom(5) + "_" + img.name : portfolio.img;
-                const sourceName = img ? getRandom(5) + "_" + source.name : portfolio.source;
-                if(!isValidURL(work)) {
-                    form.classList.add("error");
-                    return;
-                }
-                form.classList.remove("error");
+                const sourceName = source ? getRandom(5) + "_" + source.name : portfolio.source;
+                // if(!isValidURL(work)) {
+                //     form.classList.add("error");
+                //     return;
+                // }
+                // form.classList.remove("error");
                 
                 let admId = getRandom(16);
                 let usrId = getRandom(20);
@@ -92,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     usrId = portfolio.usrId;
                 }
  
-            const data = { title, text, work, img: imgName, source: sourceName, admId, usrId, };
+            const data = { title, text, img: imgName, source: sourceName, admId, usrId, };
             new Promise(res => {
                 // NOTE: comment it (3 rows below) for dev mode
                 // const response = grecaptcha.getResponse();
@@ -101,13 +98,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(img || source) {
                     const storageRefImg = firebase.storage().ref(imgName);
                     const storageRefSrc = firebase.storage().ref(sourceName);
-                    const tasks = [img ? storageRefImg.put(img) : new Promise(), source ? storageRefSrc.put(source) : new Promise()];
+                    const tasks = [];
+                    if(img)
+                        tasks.push(storageRefImg.put(img));
+                    if(source)
+                        tasks.push(storageRefSrc.put(source));
                     Promise.all(tasks).then((_) => {
                         res();
                     })
-                    // task1.on('state_changed', function progress() {}, function error(err) {}, function complete() {
-                    //     res();
-                    // })
+                } else {
+                    res();
                 }
             })
                 .then(() => {
