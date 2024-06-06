@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     let template;
-    let imgURL;
     // get portfolio from database
     fetch(`${databaseId}/portfolios.json`)
         .then(res => {
@@ -26,8 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const [portfolio, portfolioId] = findRecord(objects, id);
             const isAdmin = () => portfolio && portfolio.admId === JSON.parse(id);
             let imgURL, sourceURL;
-            firebase.storage().ref(portfolio.img).getDownloadURL()
+            const task = portfolio ? firebase.storage().ref(portfolio.img).getDownloadURL() : new Promise((res) => res());
+            task
             .then((data) => {
+                if(!data)
+                    return;
                 imgURL = data;
                 return firebase.storage().ref(portfolio.source).getDownloadURL();
             })
@@ -36,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(portfolio) {
                     const editBtnTemplate = isAdmin() ? `<button class="btn btn-mr" type="button" id="edit-btn">Редактировать</button>` : "";
                     const removeBtnTemplate = isAdmin() ? `<button class="btn" type="button" id="remove-btn">Удалить</button>` : "";
-                    // add portfolio item to the page
                     template = 
                     `
                     <div class="portfolio">

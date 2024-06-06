@@ -26,6 +26,7 @@ const getMessage = (admId, usrId, edit) => {
             <h3 class="tac typography" style="margin-bottom: 5px>Портфолио создано</p>
             <p class="text" style="margin-bottom: 5px;">Your admin code: ${admId}</p>
             <p class="text" style="margin-bottom: 5px;">Your user code: ${usrId}</p>
+            <button class="btn" id="btn-back">Вернуться на главную</button>
         </div>
     `;
     }
@@ -62,10 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(`${databaseId}/portfolios.json`)
         .then(res => res.json())
         .then(objects => {
-            const [portfolio, portfolioIdx] = findRecord(objects, id);
+            let [portfolio, portfolioIdx] = findRecord(objects, id);
             if(portfolio) {
                 titleInput.value = portfolio.title;
                 textInput.value = portfolio.text;
+            } else {
+                portfolio = {};
             }
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -75,11 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const source = sourceInput.files[0];
                 const imgName = img ? getRandom(5) + "_" + img.name : portfolio.img;
                 const sourceName = source ? getRandom(5) + "_" + source.name : portfolio.source;
-                // if(!isValidURL(work)) {
-                //     form.classList.add("error");
-                //     return;
-                // }
-                // form.classList.remove("error");
+                if(!edit && (!source || !img)) {
+                    form.classList.add("error");
+                    return;
+                }
+                form.classList.remove("error");
                 
                 let admId = getRandom(16);
                 let usrId = getRandom(20);
@@ -120,8 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(() => {
                     form.reset();
                     document.getElementById("signup").innerHTML = getMessage(admId, usrId, edit);
+                    const btnBack = document.getElementById("btn-back")
                     if(edit)
-                        document.getElementById("btn-back").addEventListener("click", () => window.location.replace(`./portfolio.html?id=${id}`))
+                        btnBack.addEventListener("click", () => window.location.replace(`./portfolio.html?id=${id}`))
+                    else 
+                        btnBack.addEventListener("click", () => window.location.replace(`./index.html`))
                 })
         });
     })
