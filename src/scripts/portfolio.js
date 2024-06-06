@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <img src="${imgURL}" alt="Failed to load the photo">
                             </div>
                         </div>
-                        <div class="actions">
+                        <div class="portfolio__actions actions">
                             <a target="_blank" class="btn btn-mr" href="${sourceURL}" download="${sourceURL}">Скачать работу</a>
                             ${editBtnTemplate}
                             ${removeBtnTemplate}
