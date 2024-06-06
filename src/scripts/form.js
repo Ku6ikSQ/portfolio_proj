@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sourceInput = document.getElementById("source_input");
     const createBtn = document.getElementById("create-form");
     const formTitle = document.getElementById("form-title");
+    const formProgress = document.getElementById("form-progress");
     let edit = id && id.length > 0;
     if(edit) {
         formTitle.textContent = "Изменение работы"
@@ -105,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         tasks.push(storageRefImg.put(img));
                     if(source)
                         tasks.push(storageRefSrc.put(source));
+                    formProgress.classList.add("pure-material-progress-linear-active");
                     Promise.all(tasks).then((_) => {
                         res();
                     })
@@ -122,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(() => {
                     form.reset();
+                    formProgress.classList.remove("pure-material-progress-linear-active");
                     document.getElementById("signup").innerHTML = getMessage(admId, usrId, edit);
                     const btnBack = document.getElementById("btn-back")
                     if(edit)
