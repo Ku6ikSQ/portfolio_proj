@@ -95,9 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = { title, text, img: imgName, source: sourceName, admId, usrId, };
             new Promise(res => {
                 // NOTE: comment it (3 rows below) for dev mode
-                // const response = grecaptcha.getResponse();
-                // if(response.length === 0)
-                //     return;
+                const response = grecaptcha.getResponse();
+                if(response.length === 0)
+                    return;
                 if(img || source) {
                     const storageRefImg = firebase.storage().ref(imgName);
                     const storageRefSrc = firebase.storage().ref(sourceName);
