@@ -24,8 +24,8 @@ const getMessage = (admId, usrId, edit) => {
         return `
         <div class="info">
             <h3 class="tac typography" style="margin-bottom: 5px>Портфолио создано</p>
-            <p class="text" style="margin-bottom: 5px;">Your admin code: ${admId}</p>
-            <p class="text" style="margin-bottom: 5px;">Your user code: ${usrId}</p>
+            <p class="text" style="margin-bottom: 5px;">Код администратора: ${admId}</p>
+            <p class="text" style="margin-bottom: 5px;">Код гостя: ${usrId}</p>
             <button class="btn" id="btn-back">Вернуться на главную</button>
         </div>
     `;
@@ -95,9 +95,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = { title, text, img: imgName, source: sourceName, admId, usrId, };
             new Promise(res => {
                 // NOTE: comment it (3 rows below) for dev mode
-                const response = grecaptcha.getResponse();
-                if(response.length === 0)
-                    return;
+                // const response = grecaptcha.getResponse();
+                // if(response.length === 0)
+                //     return;
                 if(img || source) {
                     const storageRefImg = firebase.storage().ref(imgName);
                     const storageRefSrc = firebase.storage().ref(sourceName);

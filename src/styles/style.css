@@ -208,7 +208,7 @@ button {
 }
 
 .portfolio {
-    padding: 40px;
+    padding: 30px;
     width: 100%;
     border: 2px solid #ccc;
     border-radius: 3px;
@@ -226,12 +226,13 @@ button {
 
 .portfolio__info {
     /* width: 50%; */
+    margin-bottom: 20px;
 }
 
 .portfolio__image {
     padding: 5px;
     max-height: 350px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     /* width: 50%; */
 }
 
@@ -401,7 +402,7 @@ button {
     }
 
     .portfolio {
-        padding: 18px;
+        padding: 10px;
     }
 
     .main {
@@ -428,20 +429,21 @@ button {
 
 @media (max-width: 467px) {
     .portfolio__title {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .portfolio_text {
+        font-size: 13px;
         margin-bottom: 0;
     }
 
-    .porfolio__info {
+    /* .porfolio__info {
         width: 40%;
     }
 
     .portfolio__image {
         width: 60%;
-    }
+    } */
 
     .footer {
         padding: 10px 30px;
