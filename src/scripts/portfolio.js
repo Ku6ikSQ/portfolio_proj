@@ -16,23 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
     let template;
     // get portfolio from database
     fetch(`${databaseId}/portfolios.json`)
-        .then(res => {
+        .then((res) => {
             if(!res)
                 return null;
-            return res.json()
+            return res;
         })
-        .then(objects => {
+        .then((data) => data.json())
+        .then((objects) => {
             const [portfolio, portfolioId] = findRecord(objects, id);
             const isAdmin = () => portfolio && portfolio.admId === JSON.parse(id);
-            let imgURL, sourceURL;
-            const task = portfolio ? firebase.storage().ref(portfolio.img).getDownloadURL() : new Promise((res) => res());
+            let sourceURL;
+            const task = portfolio ? firebase.storage().ref('files/' + portfolio.source).getDownloadURL() : new Promise((res) => res());
             task
-            .then((data) => {
-                if(!data)
-                    return;
-                imgURL = data;
-                return firebase.storage().ref(portfolio.source).getDownloadURL();
-            })
             .then((data) => {
                 sourceURL = data;
                 if(portfolio) {
@@ -48,10 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
                             <div class="portfolio__images">
                                 <div class="portfolio__image">    
-                                    <img src="${imgURL}" alt="Failed to load the photo">
+                                    <img src="${portfolio.photos[0]}" alt="Failed to load the photo">
                                 </div>
                                 <div class="portfolio__image">    
-                                <img src="${imgURL}" alt="Failed to load the photo">
+                                <img src="${portfolio.photos[0]}" alt="Failed to load the photo">
                             </div>
                             </div>
                         </div>
