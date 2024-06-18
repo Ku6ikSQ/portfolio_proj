@@ -10,6 +10,18 @@ function findRecord(objects, id) {
     ]
 }
 
+function getPhotosHTML(photos) {
+    let html = '';
+    photos.forEach((photo) => {
+        html += `
+            <div class="portfolio__image">    
+                <img src="${photo}" alt="Failed to load the photo">
+            </div>
+        ` 
+    })
+    return html;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
@@ -21,7 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 return null;
             return res;
         })
-        .then((data) => data.json())
+        .then((data) => {
+            return data.json();
+        })
         .then((objects) => {
             const [portfolio, portfolioId] = findRecord(objects, id);
             const isAdmin = () => portfolio && portfolio.admId === JSON.parse(id);
@@ -42,12 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <p class="text portfolio_text">${portfolio.text}</p>
                             </div>
                             <div class="portfolio__images">
-                                <div class="portfolio__image">    
-                                    <img src="${portfolio.photos[0]}" alt="Failed to load the photo">
-                                </div>
-                                <div class="portfolio__image">    
-                                <img src="${portfolio.photos[0]}" alt="Failed to load the photo">
-                            </div>
+                                ${getPhotosHTML(portfolio.photos)}
                             </div>
                         </div>
                         <div class="portfolio__actions actions">

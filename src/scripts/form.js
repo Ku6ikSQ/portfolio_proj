@@ -117,6 +117,31 @@ document.addEventListener("DOMContentLoaded", () => {
                     text: textInput.value,
                 })
                 .then(() => {
+                    if(sourceInput.files[0]) 
+                        return uploadFile(sourceInput.files[0]);
+                })
+                .then((sourceURL) => {
+                    if(!sourceURL)
+                        return;
+                    rf.update({
+                        source: sourceURL
+                    })
+                })
+                .then(() => {
+                    if(imgInput.files.length)
+                        return getPhotos(imgInput.files);
+                })
+                .then((photos) => {
+                    if(photos) 
+                        rf.update({
+                            photos: photos,
+                        })
+                })
+                .then(() => {
+                    // NOTE: comment it (3 rows below) for dev mode
+                    //     const response = grecaptcha.getResponse();
+                    //     if(response.length === 0)
+                    //         return;
                     form.reset();
                     formProgress.classList.remove("pure-material-progress-linear-active");
                     document.getElementById("signup").innerHTML = getMessage(portfolio.admId, portfolio.usrId, edit);
@@ -152,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         database.ref('portfolios/').push(obj);
                         form.reset();
                         formProgress.classList.remove("pure-material-progress-linear-active");
-                        document.getElementById("signup").innerHTML = getMessage(portfolio.admId, portfolio.usrId, edit);
+                        document.getElementById("signup").innerHTML = getMessage(obj.admId, obj.usrId, edit);
                         const btnBack = document.getElementById("btn-back")
                         btnBack.addEventListener("click", () => window.location.replace(`./index.html`))
                     })
