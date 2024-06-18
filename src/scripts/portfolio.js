@@ -46,8 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <h3 class="typography portfolio__title">${portfolio.title}</h3>
                                 <p class="text portfolio_text">${portfolio.text}</p>
                             </div>
-                            <div class="portfolio__image">    
+                            <div class="portfolio__images">
+                                <div class="portfolio__image">    
+                                    <img src="${imgURL}" alt="Failed to load the photo">
+                                </div>
+                                <div class="portfolio__image">    
                                 <img src="${imgURL}" alt="Failed to load the photo">
+                            </div>
                             </div>
                         </div>
                         <div class="portfolio__actions actions">
@@ -67,6 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 const wrapper = document.getElementById("main-wrapper");
                 wrapper.innerHTML = template;
+
+                $(document).ready(function(){
+                    $('.portfolio__images').slick();
+                });
+                
                 if(!isAdmin(id))
                     return;
     
