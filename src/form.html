@@ -32,8 +32,8 @@
                     <input id="title_input" type="text" class="input" placeholder="Введите название" />
                     <textarea id="text_input" type="text" class="input" placeholder="Введите описание"></textarea> 
                     <div class="file-input-container">
-                        <input class="file-input" id="img_input" accept="image/*" type="file" />
-                        <span class="custom-file-label">Выберите изображение</span>
+                        <input class="file-input" id="img_input" accept="image/*" type="file" multiple />
+                        <span class="custom-file-label">Выберите изображения</span>
                     </div>
                     <div class="file-input-container">
                         <input class="file-input" id="source_input" accept=".zip,.rar,.7z,.tar,.gz" type="file" />
@@ -61,7 +61,7 @@
         </div>
      </footer>
     <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
-    <script type="module">
+    <script>
         // import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
         const firebaseConfig = {
           apiKey: "AIzaSyD4SJVefOxbRs5cHnAAazw30b6Y_qMdPGw",
@@ -69,11 +69,13 @@
           projectId: "portfolio-app-536d7",
           storageBucket: "portfolio-app-536d7.appspot.com",
           messagingSenderId: "277615129475",
-          appId: "1:277615129475:web:ed965cc06fad4b36e6bcb6"
+          appId: "1:277615129475:web:ed965cc06fad4b36e6bcb6",
+          databaseURL: "https://portfolio-app-536d7-default-rtdb.firebaseio.com/"
         };
       
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
     </script>
      <script>
         const fileInputs = document.querySelectorAll('.file-input');
