@@ -55,10 +55,15 @@ function imageToBase64(imageFile) {
 function getPhotos(photos) {
     // if(!photos.length) return new Promise((res) => res());
     // return Array.from(photos).map(photo => imageToBase64(photo))
+    const fnames = [];
     return new Promise((res) => {
-        const arr = Array.from(photos).map(photo => imageToBase64(photo));
-        Promise.all(arr).then((data) => {
-            res(data);
+        const arr = Array.from(photos).map((photo) => {
+            const fname = getRandom(4) + "_" + photo.name;
+            fnames.push(fname);
+            return firebase.storage().ref('photos/' + fname).put(photo);
+        });
+        Promise.all(arr).then(() => {
+            res(fnames);
         })
     })
 }
@@ -110,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(([portfolio, portfolioId]) => {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
+            formProgress.classList.add("pure-material-progress-linear-active");
             if(edit) {
                 const rf = database.ref('portfolios/' + portfolioId);
                 rf.update({
@@ -136,8 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         rf.update({
                             photos: photos,
                         })
-                })
-                .then(() => {
+
                     // NOTE: comment it (3 rows below) for dev mode
                     //     const response = grecaptcha.getResponse();
                     //     if(response.length === 0)

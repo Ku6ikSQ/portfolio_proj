@@ -44,6 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
             task
             .then((data) => {
                 sourceURL = data;
+                return Promise.all(portfolio.photos.map((photo) => firebase.storage().ref('photos/' + photo).getDownloadURL()))
+                .then((photosURLS) => photosURLS);
+            })
+            .then((photos) => {
                 if(portfolio) {
                     const editBtnTemplate = isAdmin() ? `<button class="btn btn-mr" type="button" id="edit-btn">Редактировать</button>` : "";
                     const removeBtnTemplate = isAdmin() ? `<button class="btn" type="button" id="remove-btn">Удалить</button>` : "";
@@ -56,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <p class="text portfolio_text">${portfolio.text}</p>
                             </div>
                             <div class="portfolio__images">
-                                ${getPhotosHTML(portfolio.photos)}
+                                ${getPhotosHTML(photos)}
                             </div>
                         </div>
                         <div class="portfolio__actions actions">

@@ -229,10 +229,13 @@ button {
     margin-bottom: 20px;
 }
 
+.portfolio__images {
+    margin-bottom: 25px;
+}
+
 .portfolio__image {
     padding: 5px;
     max-height: 350px;
-    margin-bottom: 25px;
     /* width: 50%; */
 }
 
