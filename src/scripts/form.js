@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(([portfolio, portfolioId]) => {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
+            formProgress.classList.add("pure-material-progress-linear-active");
             if(edit) {
                 const rf = database.ref('portfolios/' + portfolioId);
                 rf.update({
@@ -139,9 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(() => {
                     // NOTE: comment it (3 rows below) for dev mode
-                    //     const response = grecaptcha.getResponse();
-                    //     if(response.length === 0)
-                    //         return;
+                        const response = grecaptcha.getResponse();
+                        if(response.length === 0)
+                            return;
                     form.reset();
                     formProgress.classList.remove("pure-material-progress-linear-active");
                     document.getElementById("signup").innerHTML = getMessage(portfolio.admId, portfolio.usrId, edit);
@@ -156,12 +157,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else
                     form.classList.remove("error");
                 //get photos urls and save it into storage1
+                let obj;
                 uploadFile(sourceInput.files[0])
                 .then((sourceURL) => {
                     getPhotos(imgInput.files)
                     .then((photos) => {
                         console.log(photos);
-                        const obj = {
+                        obj = {
                             title: titleInput.value,
                             text: textInput.value,
                             admId: getRandom(16),
@@ -169,12 +171,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             photos: photos,
                             source: sourceURL,
                         }
-                        
                         // NOTE: comment it (3 rows below) for dev mode
-                        //     const response = grecaptcha.getResponse();
-                        //     if(response.length === 0)
-                        //         return;
+                            const response = grecaptcha.getResponse();
+                            if(response.length === 0)
+                                return;
                         database.ref('portfolios/').push(obj);
+                    })
+                    .then(() => {
                         form.reset();
                         formProgress.classList.remove("pure-material-progress-linear-active");
                         document.getElementById("signup").innerHTML = getMessage(obj.admId, obj.usrId, edit);
@@ -185,65 +188,4 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     })
-}); 
-
-  //     const title = titleInput.value;
-        //     const text = textInput.value;
-        //     const img = imgInput.files[0];
-        //     const source = sourceInput.files[0];
-        //     const imgName = img ? getRandom(5) + "_" + img.name : portfolio.img;
-        //     const sourceName = source ? getRandom(5) + "_" + source.name : portfolio.source;
-        //     if(!edit && (!source || !img)) {
-        //         form.classList.add("error");
-        //         return;
-        //     }
-        //     form.classList.remove("error");
-            
-        //     let admId = getRandom(16);
-        //     let usrId = getRandom(20);
-        //     if(edit) {
-        //         admId = portfolio.admId;
-        //         usrId = portfolio.usrId;
-        //     }
-
-        // const data = { title, text, img: imgName, source: sourceName, admId, usrId, };
-        // new Promise(res => {
-        //     // NOTE: comment it (3 rows below) for dev mode
-        //     const response = grecaptcha.getResponse();
-        //     if(response.length === 0)
-        //         return;
-        //     if(img || source) {
-        //         const storageRefImg = firebase.storage().ref(imgName);
-        //         const storageRefSrc = firebase.storage().ref(sourceName);
-        //         const tasks = [];
-        //         if(img)
-        //             tasks.push(storageRefImg.put(img));
-        //         if(source)
-        //             tasks.push(storageRefSrc.put(source));
-        //         formProgress.classList.add("pure-material-progress-linear-active");
-        //         Promise.all(tasks).then((_) => {
-        //             res();
-        //         })
-        //     } else {
-        //         res();
-        //     }
-        // })
-        //     .then(() => {
-        //         if(edit) {
-        //             fetch(`${databaseId}/portfolios/${portfolioIdx}.json`, {method: "PUT", body: JSON.stringify(data) });
-        //         } else {
-        //             fetch(`${databaseId}/portfolios.json`, {method: "POST", body: JSON.stringify(data)});
-        //         }
-        //     })
-        //     .then(() => {
-        //     })
-        //     .then(() => {
-        //         form.reset();
-        //         formProgress.classList.remove("pure-material-progress-linear-active");
-        //         document.getElementById("signup").innerHTML = getMessage(admId, usrId, edit);
-        //         const btnBack = document.getElementById("btn-back")
-        //         if(edit)
-        //             btnBack.addEventListener("click", () => window.location.replace(`./portfolio.html?id=${id}`))
-        //         else 
-        //             btnBack.addEventListener("click", () => window.location.replace(`./index.html`))
-        //     })
+});
