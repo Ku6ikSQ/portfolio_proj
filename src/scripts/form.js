@@ -140,9 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(() => {
                     // NOTE: comment it (3 rows below) for dev mode
-                        const response = grecaptcha.getResponse();
-                        if(response.length === 0)
-                            return;
+                    const response = grecaptcha.getResponse();
+                    if(response.length === 0)
+                        return;
                     form.reset();
                     formProgress.classList.remove("pure-material-progress-linear-active");
                     document.getElementById("signup").innerHTML = getMessage(portfolio.admId, portfolio.usrId, edit);
@@ -172,9 +172,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             source: sourceURL,
                         }
                         // NOTE: comment it (3 rows below) for dev mode
-                            const response = grecaptcha.getResponse();
-                            if(response.length === 0)
-                                return;
+                        const response = grecaptcha.getResponse();
+                        if(response.length === 0)
+                            return;
                         database.ref('portfolios/').push(obj);
                     })
                     .then(() => {
