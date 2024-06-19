@@ -239,6 +239,10 @@ button {
     margin-bottom: 25px;
 }
 
+#portfolio-progress {
+    width: 100%;
+}
+
 .portfolio__image img {
     display: inline-block;
     width: 100%;

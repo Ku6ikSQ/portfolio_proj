@@ -25,6 +25,7 @@ function getPhotosHTML(photos) {
 document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
+    const progressBar = document.getElementById("portfolio-progress");
     let template;
     // get portfolio from database
     fetch(`${databaseId}/portfolios.json`)
@@ -38,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then((objects) => {
             const [portfolio, portfolioId] = findRecord(objects, id);
+            progressBar.classList.remove("pure-material-progress-linear-active");
             const isAdmin = () => portfolio && portfolio.admId === JSON.parse(id);
             let sourceURL;
             const task = portfolio ? firebase.storage().ref('files/' + portfolio.source).getDownloadURL() : new Promise((res) => res());
